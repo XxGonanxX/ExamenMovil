@@ -7,9 +7,17 @@
 
 import SwiftUI
 
+
+
 struct StartView: View {
     
     @StateObject private var startViewModel = StartViewModel()
+    
+    static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
     
     var body: some View {
         Spacer()
@@ -19,12 +27,20 @@ struct StartView: View {
         Spacer()
         VStack{
             // Primer DatePicker para la fecha de inicio
-            DatePicker("Fecha de inicio:", selection: $startViewModel.startDate, displayedComponents: .date)
+            DatePicker("Fecha de inicio:", selection: $startViewModel.startDate, in: ...Date(),
+                       displayedComponents: [.date])
+            .onChange(of: startViewModel.startDate) { _ in
+                                // Actualizar la vista cuando cambia la fecha
+                            }
                            .padding()
 
                        // Segundo DatePicker para la fecha de fin
-            DatePicker("Fecha de fin:", selection: $startViewModel.endDate, displayedComponents: .date)
-                           .padding()
+            DatePicker("Fecha de fin:", selection: $startViewModel.endDate, in: ...Date(),
+                       displayedComponents: [.date])
+            .onChange(of: startViewModel.startDate) { _ in
+                                // Actualizar la vista cuando cambia la fecha
+                            }
+                .padding()
 
                        // TextField para el texto
             TextField("Ingresa un país", text: $startViewModel.textInput)
@@ -33,15 +49,20 @@ struct StartView: View {
         Spacer()
         VStack{
             Button(action: {
-                                // Aquí puedes agregar la lógica que se ejecutará cuando se presione el botón
-                                print("Botón presionado")
-                            }) {
-                                Text("Aceptar")
-                                    .padding()
-                                    .foregroundColor(.white)
-                                    .background(Color.blue)
-                                    .cornerRadius(10)
-                            }
+                startViewModel.procesarDatoss()
+                // Aquí puedes agregar la lógica que se ejecutará cuando se presione el botón
+                print("Botón presionado")
+            }) {
+                NavigationLink(destination: DetailView()) {
+                    
+                    Text("Aceptar")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+                
+            }
         }
         Spacer()
         

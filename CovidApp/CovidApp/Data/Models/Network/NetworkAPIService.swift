@@ -12,30 +12,39 @@ class NetworkAPIService {
     static let shared = NetworkAPIService()
     
     let apiKey = "wQJQSBY0VEm6Si+tRjTpCQ==qTcldfbpLTdYr3Zc"
+    let baseURL = "https://api.api-ninjas.com/v1/covid19"
     
-    
-    func getCases(url: URL, Limit: Int) async -> Cases? {
-        let parameters : Parameters = [
-            "limit" : Limit
-        ]
-        
-        var headers: HTTPHeaders = [:]
-        headers["X-Api-Key"] = apiKey
+    func sendCaseData(startDate: String, endDate: String, country: String?, limit: Int) async -> Cases? {
+        let url = URL(string: "\(baseURL)?date=\(startDate)&\(endDate)&country=\(country ?? "")")!
 
-        
-        let taskRequest = AF.request(url, method: .get, parameters: parameters).validate()
+        let headers: HTTPHeaders = [
+            "X-Api-Key": apiKey
+        ]
+
+        let taskRequest = AF.request(url, method: .get, headers: headers).validate()
         let response = await taskRequest.serializingData().response
         
-        switch response.result{
-        case.success(let data):
+        print(taskRequest)
+        print(response)
+        
+        switch response.result {
+        case .success(let data):
             do {
+                if let jsonString = String(data: data, encoding: .utf8) {
+                               print("JSON Response: \(jsonString)")
+                           }
                 return try JSONDecoder().decode(Cases.self, from: data)
             } catch {
-                return nil
+                return try nil
             }
-        case let .failure(error):
+        case .failure(let error):
             debugPrint(error.localizedDescription)
+            if let data = response.data {
+                let stringData = String(data: data, encoding: .utf8)
+                print("Response Data: \(stringData ?? "Unable to decode data")")
+            }
             return nil
         }
+
     }
 }

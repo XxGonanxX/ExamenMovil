@@ -12,15 +12,15 @@ struct API {
     
     struct routes {
         
-        static let startDate = "date=StartDate"
-        static let endDate = "&endDate"
-        static let country = "&country=country"
+        static let startDate = "date="
+        static let endDate = "&"
+        static let country = "&country="
         
     }
 }
 
 protocol CasesAPIProtocol {
-    func getCaseList(limit: Int) async -> Cases?
+    func sendCaseData(startDate: String, endDate: String, country: String?, limit: Int) async -> Cases?
 }
 
 class CaseRepository: CasesAPIProtocol {
@@ -32,12 +32,19 @@ class CaseRepository: CasesAPIProtocol {
         self.nservice = nservice
     }
     
-    func getCaseList(limit: Int) async -> Cases? {
-        
+    func sendCaseData(startDate: String, endDate: String, country: String?, limit: Int) async -> Cases? {
         let apiInstance = API()
+        let urlString = "\(apiInstance.base)\(API.routes.startDate)\(startDate)\(API.routes.endDate)\(endDate)\(API.routes.country)\(country)"
         
-        return await nservice.getCases(url: URL(string:"\(apiInstance.base)\(API.routes.startDate)\(API.routes.endDate)\(API.routes.country)")!,Limit: limit)
+        guard let url = URL(string: urlString) else {
+            // Manejo de error si la URL no es válida
+            return nil
+        }
         
+        
+
+        return await nservice.sendCaseData(startDate: startDate, endDate: endDate, country: country, limit: limit)
     }
+
 }
 
