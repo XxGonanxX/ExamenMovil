@@ -9,9 +9,7 @@ import SwiftUI
 
 struct StartView: View {
     
-    @State private var startDate = Date()
-    @State private var endDate = Date()
-    @State private var textInput = ""
+    @StateObject private var startViewModel = StartViewModel()
     
     var body: some View {
         Spacer()
@@ -21,15 +19,15 @@ struct StartView: View {
         Spacer()
         VStack{
             // Primer DatePicker para la fecha de inicio
-                       DatePicker("Fecha de inicio:", selection: $startDate, displayedComponents: .date)
+            DatePicker("Fecha de inicio:", selection: $startViewModel.startDate, displayedComponents: .date)
                            .padding()
 
                        // Segundo DatePicker para la fecha de fin
-                       DatePicker("Fecha de fin:", selection: $endDate, displayedComponents: .date)
+            DatePicker("Fecha de fin:", selection: $startViewModel.endDate, displayedComponents: .date)
                            .padding()
 
                        // TextField para el texto
-                       TextField("Ingresa un país", text: $textInput)
+            TextField("Ingresa un país", text: $startViewModel.textInput)
                            .padding()
         }
         Spacer()
