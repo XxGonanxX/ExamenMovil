@@ -2,4 +2,7 @@
 
 Alan Patricio González Bernal
 A01067546
-iOS - Swift
+iOS
+ Swift
+
+
