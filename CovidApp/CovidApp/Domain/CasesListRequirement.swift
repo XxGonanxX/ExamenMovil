@@ -6,3 +6,23 @@
 //
 
 import Foundation
+
+protocol CaseListRequierementProtocol {
+    func getCasesList(limit: Int) async -> Cases?
+    
+}
+    
+class CaseListRequirement: CaseListRequierementProtocol {
+
+    static let shared = CaseListRequirement()
+
+    func getCasesList(limit: Int) async -> Cases? {
+        return await dataRepository.getCaseList(limit: limit)
+    }
+    
+    let dataRepository: CaseRepository
+    
+    init(dataRepository: CaseRepository = CaseRepository.shared) {
+        self.dataRepository = dataRepository
+    }
+}
