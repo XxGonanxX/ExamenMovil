@@ -20,21 +20,23 @@ struct API {
 }
 
 protocol CasesAPIProtocol {
-    func getCasesList(limit: Int) async -> Cases?
+    func getCaseList(limit: Int) async -> Cases?
 }
 
-class CasesRepository: CasesAPIProtocol {
+class CaseRepository: CasesAPIProtocol {
     let nservice: NetworkAPIService
     
-    static let shared = CasesRepository()
+    static let shared = CaseRepository()
     
     init(nservice: NetworkAPIService = NetworkAPIService.shared){
         self.nservice = nservice
     }
     
-    func getCasesList(limit: Int) async -> Cases? {
+    func getCaseList(limit: Int) async -> Cases? {
         
-        return await nservice.getCases(url: URL(string:"\(API.base)\(API.routes.startDate)\(API.routes.endDate)\(API.routes.country)")!,Limit: limit)
+        let apiInstance = API()
+        
+        return await nservice.getCases(url: URL(string:"\(apiInstance.base)\(API.routes.startDate)\(API.routes.endDate)\(API.routes.country)")!,Limit: limit)
         
     }
 }
