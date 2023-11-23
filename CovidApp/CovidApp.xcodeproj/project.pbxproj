@@ -16,6 +16,7 @@
 		4711A3BC2B0FCB9100048F73 /* NetworkAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711A3BB2B0FCB9100048F73 /* NetworkAPIService.swift */; };
 		4711A3BE2B0FCC1D00048F73 /* Cases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711A3BD2B0FCC1D00048F73 /* Cases.swift */; };
 		4711A3C02B0FCCB400048F73 /* CasesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711A3BF2B0FCCB400048F73 /* CasesRepository.swift */; };
+		4711A3C32B0FDF6D00048F73 /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = 4711A3C22B0FDF6D00048F73 /* FlowStacks */; };
 		471CEB452B0FC11A005FE1EB /* CovidAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471CEB442B0FC11A005FE1EB /* CovidAppApp.swift */; };
 		471CEB492B0FC123005FE1EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 471CEB482B0FC123005FE1EB /* Assets.xcassets */; };
 		471CEB4C2B0FC123005FE1EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 471CEB4B2B0FC123005FE1EB /* Preview Assets.xcassets */; };
@@ -67,6 +68,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4711A3A42B0FC28D00048F73 /* Alamofire in Frameworks */,
+				4711A3C32B0FDF6D00048F73 /* FlowStacks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +234,7 @@
 			name = CovidApp;
 			packageProductDependencies = (
 				4711A3A32B0FC28D00048F73 /* Alamofire */,
+				4711A3C22B0FDF6D00048F73 /* FlowStacks */,
 			);
 			productName = CovidApp;
 			productReference = 471CEB412B0FC11A005FE1EB /* CovidApp.app */;
@@ -307,6 +310,7 @@
 			mainGroup = 471CEB382B0FC119005FE1EB;
 			packageReferences = (
 				4711A3A22B0FC28D00048F73 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				4711A3C12B0FDF6D00048F73 /* XCRemoteSwiftPackageReference "FlowStacks" */,
 			);
 			productRefGroup = 471CEB422B0FC11A005FE1EB /* Products */;
 			projectDirPath = "";
@@ -698,6 +702,14 @@
 				minimumVersion = 5.8.1;
 			};
 		};
+		4711A3C12B0FDF6D00048F73 /* XCRemoteSwiftPackageReference "FlowStacks" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnpatrickmorgan/FlowStacks";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -705,6 +717,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4711A3A22B0FC28D00048F73 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		4711A3C22B0FDF6D00048F73 /* FlowStacks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4711A3C12B0FDF6D00048F73 /* XCRemoteSwiftPackageReference "FlowStacks" */;
+			productName = FlowStacks;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

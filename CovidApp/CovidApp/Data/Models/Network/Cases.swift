@@ -11,10 +11,13 @@ import Foundation
 struct Cases: Codable {
     var count: Int
     var results: [Case]
+    var startDate: String
+    var endDate: String
 }
 
-struct Case: Codable {
-    var startDate: Date
-    var endDate: Date
+
+struct Case:Codable, Identifiable {
+    var id: Int
+    var date: Date
     var country: String?
 }
