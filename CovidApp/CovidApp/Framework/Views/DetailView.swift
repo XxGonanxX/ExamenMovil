@@ -7,12 +7,31 @@
 
 import SwiftUI
 
-struct DetailView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
 
-#Preview {
-    DetailView()
-}
+
+
+struct ContentView: View {
+    @StateObject var detailViewModel = DetailViewModel()
+    
+    var body: some View {
+        NavigationView {
+        //    List(detailViewModel.casesList) { caseBase in
+                NavigationLink{
+                 //   PokemonDetailView(pokemonBase: pokemonBase)
+                } label: {
+                    HStack {
+                       // Text(pokemonBase.pokemon.name)
+                    }
+                }
+            }.onAppear {
+                Task {
+                 //   await detailViewModel.getCasesList()
+                    
+                }
+            }
+        }
+    }
+// }
+
+    
+
