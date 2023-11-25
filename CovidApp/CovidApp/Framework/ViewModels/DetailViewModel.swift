@@ -6,11 +6,11 @@
 //
 
 import Foundation
-import Foundation
 
 class DetailViewModel: ObservableObject {
-    @Published var casesList: [Case] = []
+    @Published var casesList: [DateCases] = []
     @Published var apiResponse: Cases?
+    
     
     private let casesRepository: CaseRepository
 
@@ -19,6 +19,14 @@ class DetailViewModel: ObservableObject {
     }
 
     func getCasesList(forCountry country: String, startDate: String, endDate: String) async {
-        apiResponse = await casesRepository.sendCaseData(startDate: startDate, endDate: endDate, country: country, limit: 10)
+        do {
+            apiResponse = try await casesRepository.sendCaseData(startDate: startDate, endDate: endDate, country: country, limit: 10)
+            
+            if let results = apiResponse?.results {
+                casesList = results
+            }
+        } catch {
+            print("Error al obtener datos: \(error)")
+        }
     }
 }

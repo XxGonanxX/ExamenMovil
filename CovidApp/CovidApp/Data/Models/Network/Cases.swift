@@ -8,16 +8,21 @@
 import Foundation
 
 
-struct Cases: Codable {
+struct Cases: Codable{
     var count: Int
-    var results: [Case]
+    var results: [DateCases]
     var startDate: String
     var endDate: String
 }
 
-
-struct Case:Codable, Identifiable {
+struct DateCases: Codable, Identifiable {
     var id: Int
-    var date: Date
-    var country: String?
+    var date: String
+    var cases: Case
+}
+
+struct Case: Codable, Identifiable {
+    var id: Int
+    var total: Int
+    var new: Int
 }

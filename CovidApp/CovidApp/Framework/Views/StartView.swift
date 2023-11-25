@@ -30,45 +30,45 @@ struct StartView: View {
             DatePicker("Fecha de inicio:", selection: $startViewModel.startDate, in: ...Date(),
                        displayedComponents: [.date])
             .onChange(of: startViewModel.startDate) { _ in
-                                // Actualizar la vista cuando cambia la fecha
-                            }
-                           .padding()
-
-                       // Segundo DatePicker para la fecha de fin
+                // Actualizar la vista cuando cambia la fecha
+            }
+            .padding()
+            
+            // Segundo DatePicker para la fecha de fin
             DatePicker("Fecha de fin:", selection: $startViewModel.endDate, in: ...Date(),
                        displayedComponents: [.date])
             .onChange(of: startViewModel.startDate) { _ in
-                                // Actualizar la vista cuando cambia la fecha
-                            }
-                .padding()
-
-                       // TextField para el texto
+                // Actualizar la vista cuando cambia la fecha
+            }
+            .padding()
+            
+            // TextField para el texto
             TextField("Ingresa un país", text: $startViewModel.textInput)
-                           .padding()
+                .padding()
         }
         Spacer()
         VStack{
-            Button(action: {
-                startViewModel.procesarDatoss()
-                // Aquí puedes agregar la lógica que se ejecutará cuando se presione el botón
-                print("Botón presionado")
-            }) {
-                NavigationLink(destination: DetailView()) {
-                    
-                    Text("Aceptar")
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                }
-                
+            NavigationLink(destination: DetailView())
+            {
+                Text("Aceptar")
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.blue)
+                    .cornerRadius(10)
             }
+            .simultaneousGesture(
+                TapGesture().onEnded {
+                    // Función que se ejecuta al activar el NavigationLink
+                    startViewModel.procesarDatoss()
+                }
+            )
+            Spacer()
+            
         }
-        Spacer()
-        
     }
 }
-
+    
 #Preview {
     StartView()
+    
 }
