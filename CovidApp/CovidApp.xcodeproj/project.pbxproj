@@ -23,6 +23,7 @@
 		471CEB562B0FC124005FE1EB /* CovidAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471CEB552B0FC124005FE1EB /* CovidAppTests.swift */; };
 		471CEB602B0FC124005FE1EB /* CovidAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471CEB5F2B0FC124005FE1EB /* CovidAppUITests.swift */; };
 		471CEB622B0FC124005FE1EB /* CovidAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471CEB612B0FC124005FE1EB /* CovidAppUITestsLaunchTests.swift */; };
+		4722FD132B1337AB00366119 /* CasesAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722FD122B1337AB00366119 /* CasesAPIProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		471CEB5B2B0FC124005FE1EB /* CovidAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovidAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		471CEB5F2B0FC124005FE1EB /* CovidAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidAppUITests.swift; sourceTree = "<group>"; };
 		471CEB612B0FC124005FE1EB /* CovidAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4722FD122B1337AB00366119 /* CasesAPIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CasesAPIProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				4711A3BB2B0FCB9100048F73 /* NetworkAPIService.swift */,
 				4711A3BD2B0FCC1D00048F73 /* Cases.swift */,
 				4711A3BF2B0FCCB400048F73 /* CasesRepository.swift */,
+				4722FD122B1337AB00366119 /* CasesAPIProtocol.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				4711A3BE2B0FCC1D00048F73 /* Cases.swift in Sources */,
 				471CEB452B0FC11A005FE1EB /* CovidAppApp.swift in Sources */,
 				4711A3BA2B0FCABC00048F73 /* CasesListRequirement.swift in Sources */,
+				4722FD132B1337AB00366119 /* CasesAPIProtocol.swift in Sources */,
 				4711A3C02B0FCCB400048F73 /* CasesRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

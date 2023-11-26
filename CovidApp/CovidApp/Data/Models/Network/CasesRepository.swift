@@ -9,9 +9,8 @@ import Foundation
 
 struct API {
     
-    // Variables que siempre serán las mismas, la apiKey es la de mi cuenta así que no debería haber problemas
-    let apiKey = "wQJQSBY0VEm6Si+tRjTpCQ==qTcldfbpLTdYr3Zc"
-    let baseURL = "https://api.api-ninjas.com/v1/covid19?"
+    // Variables que siempre serán las mismas
+    static let base = "https://api.api-ninjas.com/v1/covid19?"
     
     struct routes {
         
@@ -20,22 +19,25 @@ struct API {
         static let Country = "country="
     }
 }
-    
-protocol CasesAPIProtocol {
-        
-    // https://api.api-ninjas.com/v1/covid19?date={date}
-    func CaseByCountry(country: String) async -> CaseByCountry?
-        
-    // https://api.api-ninjas.com/v1/covid19?country={country}
-    func CaseByDate(date: Int) async -> CaseByDate?
-}
+
 
 class CasesRepository: CasesAPIProtocol {
-    func CaseByCountry(country: String) async -> CaseByCountry? {
-        // Aquí va el código bellaco
+    
+    let nservice: NetworkAPIService
+    
+    init(nservice: NetworkAPIService = NetworkAPIService.shared) {
+        self.nservice = nservice
     }
     
-    func CaseByDate(date: Int) async -> CaseByDate? {
-        // Aquí va aún más código bellaco (que bellaco el código)
+    func getCaseByCountry(country: String) async -> CaseByCountry? {
+        // Aquí va el código bellaco
+        return await nservice.getCaseByCountry(url: URL(string:"\(API.base)\(API.routes.Country)\(country)")!, Country: country)
     }
+    
+    func getCaseByDate(date: String) async -> CaseByDate? {
+        // Aquí va aún más código bellaco (que bellaco el código)
+        return await nservice.getCaseByDate(url: URL(string:"\(API.base)\(API.routes.Date)\(date)")!, Date: date)
+        
+    }
+    
 }

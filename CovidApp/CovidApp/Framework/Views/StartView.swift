@@ -39,8 +39,8 @@ struct StartView: View {
                 
                 Button(action: {
                     Task{
-                        let results = await startViewModel.procesarDatoss()
-                        Text("Resultados")
+                      //  let results = await startViewModel.procesarDatoss()
+                     //   Text("Resultados")
                     }
                                 
                 }) {

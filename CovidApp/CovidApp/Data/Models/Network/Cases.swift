@@ -14,21 +14,22 @@ struct CaseByCountry: Codable {
     var cases: [Date]
 }
 
-struct Date: Codable, Identifiable {
-    var id: Int
-    var date: Int
-    var events: [Events]
+struct Date: Codable {
+    var date: String
+    var cases: [Cases]
 }
 
 // Este struct específicamente es el único que comparten ambos tipos del JSON
-struct Events: Codable {
+struct Cases: Codable, Identifiable {
+    var id: Int
     var total: Int
     var new: Int
 }
 
 // Ahora el struct en caso de que sea por fecha
-struct CaseByDate: Codable {
+struct CaseByDate: Codable, Identifiable {
+    var id: Int
     var country: String
     var region: String
-    var cases: [Events]
+    var cases: [Cases]
 }

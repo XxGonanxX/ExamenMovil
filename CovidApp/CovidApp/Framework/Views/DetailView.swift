@@ -7,28 +7,38 @@
 import SwiftUI
 
 struct DetailView: View {
-    @ObservedObject var viewModel = StartViewModel()
-    @State private var showData = false
+    @State var caseList = [CaseByDate]()
 
     var body: some View {
-        VStack {
-            if showData {
-                Text(viewModel.casosDesempaquetados.description)
-            } else {
-                Text("Esperando datos...")
-                    .onAppear {
-                        // Introduce un retraso de 3 segundos antes de mostrar los datos
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            showData = true
-                            Task{
-                                await viewModel.procesarDatos()
-                            }
-                        }
-                    }
+        Text("We're going on")
+        List(caseList) { caseByDate in
+            HStack {
+              //  Text("\(caseByDate.cases)") // Acceder a la propiedad 'cases' del elemento
             }
+        }
+        .task {
+            await getCaseByDate()
+        }
+    }
+
+    func getCaseByDate() async {
+        do {
+            print("On DetailView")
+            let repository = CasesRepository()
+            if let result = try await repository.getCaseByDate(date:"2022-05-05") {
+                caseList = [result]
+                print(caseList)
+                print(result)
+            } else {
+                caseList = []
+                print("caseList Empty")
+            }
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }
+
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         // Crea una instancia de DetailViewModel y pásala a la vista previa
