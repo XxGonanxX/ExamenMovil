@@ -16,6 +16,7 @@ class StartViewModel: ObservableObject {
     var detailView: DetailView?
     @Published var cases: [CountryData] = []
     private var casos: [CountryData]?
+    @Published var casosDesempaquetados: [CountryData] = []
     
     
     private let casesRepository: CaseRepository
@@ -44,6 +45,7 @@ class StartViewModel: ObservableObject {
             // Hacer algo con los datos devueltos por la API, por ejemplo, imprimirlos
             print("Ahora van los casos")
             print(casosDesempaquetados)
+            self.casosDesempaquetados = casosDesempaquetados
             
         } else {
             print("No se obtuvieron casos")

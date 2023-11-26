@@ -10,7 +10,7 @@ struct DetailView: View {
     
     @ObservedObject var viewModel = StartViewModel()
 
-     var body: some View {
+    var body: some View {
          VStack {
              if let countryData = viewModel.casosDesempaquetados {
                  Text("Datos del país: \(countryData.country)")
