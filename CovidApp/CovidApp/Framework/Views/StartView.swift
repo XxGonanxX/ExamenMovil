@@ -12,6 +12,7 @@ import SwiftUI
 struct StartView: View {
     
     @StateObject private var startViewModel = StartViewModel()
+    @State public var prueba1: String
     
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -23,53 +24,44 @@ struct StartView: View {
         NavigationView {
             VStack {
                 Spacer()
-                Text("Bienvenido, por favor, ingrese un país y los parámetros de las fechas")
+                Text("Bienvenido, por favor, ingrese un país o una fecha (no ambos)")
                     .padding()
                 
-                // Primer DatePicker para la fecha de inicio
-                DatePicker("Fecha de inicio:", selection: $startViewModel.startDate, in: ...Date(),
-                           displayedComponents: [.date])
-                    .onChange(of: startViewModel.startDate) { _ in
-                        // Actualizar la vista cuando cambia la fecha
-                    }
-                    .padding()
-                
-                // Segundo DatePicker para la fecha de fin
-                DatePicker("Fecha de fin:", selection: $startViewModel.endDate, in: ...Date(),
-                           displayedComponents: [.date])
-                    .onChange(of: startViewModel.startDate) { _ in
-                        // Actualizar la vista cuando cambia la fecha
-                    }
+                TextField("Ingresa una fecha" , text: $prueba1)
+                    .keyboardType(.numbersAndPunctuation)
                     .padding()
                 
                 // TextField para el texto
-                TextField("Ingresa un país", text: $startViewModel.textInput)
+                TextField("Ingresa un país", text: $prueba1)
                     .padding()
                 
                 Spacer()
                 
-                NavigationLink(destination: DetailView()) {
+                Button(action: {
+                    Task{
+                        let results = await startViewModel.procesarDatoss()
+                        Text("Resultados")
+                    }
+                                
+                }) {
                     Text("Aceptar")
                         .padding()
                         .foregroundColor(.white)
                         .background(Color.blue)
                         .cornerRadius(10)
                 }
-                .simultaneousGesture(
-                    TapGesture().onEnded {
-                        // Función que se ejecuta al activar el NavigationLink
-                        startViewModel.procesarDatoss()
-                    }
-                )
-                
                 Spacer()
             }
+            
+            Spacer()
+            
+            
         }
     }
 }
 
     
 #Preview {
-    StartView()
+    StartView(prueba1: String())
     
 }
