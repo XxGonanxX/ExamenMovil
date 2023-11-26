@@ -41,15 +41,19 @@ class StartViewModel: ObservableObject {
     func procesarDatos() async {
         casos = await casesRepository.sendCaseData(startDate: StartView.dateFormatter.string(from: startDate), endDate: StartView.dateFormatter.string(from: endDate), country: textInput, limit: 10)
         
+        self.casosDesempaquetados = []
+        
         if let casosDesempaquetados = casos {
             // Hacer algo con los datos devueltos por la API, por ejemplo, imprimirlos
-            print("Ahora van los casos")
-            print(casosDesempaquetados)
+           // print("Ahora van los casos")
+           // print(casosDesempaquetados)
             self.casosDesempaquetados = casosDesempaquetados
             
         } else {
             print("No se obtuvieron casos")
         }
+        
+        print(casosDesempaquetados)
     }
 }
 
