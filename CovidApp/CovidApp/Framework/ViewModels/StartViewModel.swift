@@ -48,8 +48,6 @@ class StartViewModel: ObservableObject {
         } else {
             print("No se obtuvieron casos")
         }
-        
-        return casosDesempaquetados
     }
 }
 
