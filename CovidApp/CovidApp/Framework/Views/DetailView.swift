@@ -33,10 +33,10 @@ struct DetailView: View {
                await getCaseByDate()
             }
             
-            List(caseListCountry, id: \.country) {data in
-                VStack(alignment: .leading) {
-                    Text("\(data.country) |")
-                    List(data.cases.sorted(by: { $0.key < $1.key }), id: \.key) { date, caseData in
+            List(caseListCountry) {caseByCountry in
+                VStack() {
+                    Text("\(caseByCountry.country) |")
+                    List(caseByCountry.cases.sorted(by: { $0.key < $1.key }), id: \.key) { date, caseData in
                         Text("\(date):")
                         Text("\(caseData.total) |")
                         Text("\(caseData.new)")

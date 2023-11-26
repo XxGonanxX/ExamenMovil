@@ -22,7 +22,7 @@ struct Date: Codable, Identifiable {
 }
 
 // Este struct específicamente es el único que comparten ambos tipos del JSON
-struct Cases: Codable, Identifiable {
+struct Cases: Codable, Identifiable, Hashable {
     var id: UUID?
     let date: String?
     var total: Int
