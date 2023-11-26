@@ -8,51 +8,27 @@ import SwiftUI
 
 struct DetailView: View {
     @ObservedObject var viewModel = StartViewModel()
-    @State private var isLoading = false
+    @State private var showData = false
 
     var body: some View {
         VStack {
-            if isLoading {
-                ProgressView("Cargando...")
+            if showData {
+                Text(viewModel.casosDesempaquetados.description)
             } else {
-                content
-            }
-        }
-        .onAppear {
-            Task {
-                await fetchData()
-            }
-        }
-    }
-
-    @ViewBuilder
-    private var content: some View {
-        if let firstCountry = viewModel.casosDesempaquetados.first {
-            VStack {
-                Text("Datos del país: \(firstCountry.country)")
-                    .font(.title)
-
-                List(firstCountry.cases.sorted(by: { $0.key > $1.key }), id: \.key) { date, caseData in
-                    VStack(alignment: .leading) {
-                        Text("Fecha: \(date)")
-                        Text("Total de casos: \(caseData.total)")
-                        Text("Nuevos casos: \(caseData.new)")
+                Text("Esperando datos...")
+                    .onAppear {
+                        // Introduce un retraso de 3 segundos antes de mostrar los datos
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            showData = true
+                            Task{
+                                await viewModel.procesarDatos()
+                            }
+                        }
                     }
-                }
             }
-        } else {
-            Text("No hay datos disponibles")
         }
-    }
-
-    private func fetchData() async {
-        isLoading = true
-        await viewModel.procesarDatos()
-        isLoading = false
     }
 }
-
-
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         // Crea una instancia de DetailViewModel y pásala a la vista previa

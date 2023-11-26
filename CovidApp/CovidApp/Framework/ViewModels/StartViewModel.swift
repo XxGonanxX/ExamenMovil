@@ -16,7 +16,7 @@ class StartViewModel: ObservableObject {
     var detailView: DetailView?
     @Published var cases: [CountryData] = []
     private var casos: [CountryData]?
-    @Published var casosDesempaquetados: [CountryData] = []
+    @Published var casosDesempaquetados: [Any] = []
     
     
     private let casesRepository: CaseRepository
@@ -25,13 +25,16 @@ class StartViewModel: ObservableObject {
             self.casesRepository = casesRepository
         }
     
+    
+    
     func procesarDatoss() {
-              // Aquí puedes agregar la lógica para procesar los datos ingresados
         print("Fecha de inicio: \(StartView.dateFormatter.string(from: startDate))")
         var startDate = StartView.dateFormatter.string(from: startDate)
         print("Fecha de fin: \(StartView.dateFormatter.string(from: endDate))")
         var endDate = StartView.dateFormatter.string(from: endDate)
         print("Texto ingresado: \(textInput)")
+              // Aquí puedes agregar la lógica para procesar los datos ingresados
+        
         
         Task{
             await procesarDatos()
@@ -39,9 +42,7 @@ class StartViewModel: ObservableObject {
           }
 
     func procesarDatos() async {
-        casos = await casesRepository.sendCaseData(startDate: StartView.dateFormatter.string(from: startDate), endDate: StartView.dateFormatter.string(from: endDate), country: textInput, limit: 10)
-        
-        self.casosDesempaquetados = []
+        casos = await casesRepository.sendCaseData(startDate: StartView.dateFormatter.string(from: startDate), endDate: StartView.dateFormatter.string(from: endDate), country: "Mexico", limit: 10)
         
         if let casosDesempaquetados = casos {
             // Hacer algo con los datos devueltos por la API, por ejemplo, imprimirlos
@@ -53,6 +54,7 @@ class StartViewModel: ObservableObject {
             print("No se obtuvieron casos")
         }
         
+       
         print(casosDesempaquetados)
     }
 }
