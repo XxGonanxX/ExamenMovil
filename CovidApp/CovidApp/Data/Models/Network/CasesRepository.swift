@@ -29,12 +29,12 @@ class CasesRepository: CasesAPIProtocol {
         self.nservice = nservice
     }
     
-    func getCaseByCountry(country: String) async -> CaseByCountry? {
+    func getCaseByCountry(country: String) async -> [CaseByCountry]? {
         // Aquí va el código bellaco
         return await nservice.getCaseByCountry(url: URL(string:"\(API.base)\(API.routes.Country)\(country)")!, Country: country)
     }
     
-    func getCaseByDate(date: String) async -> CaseByDate? {
+    func getCaseByDate(date: String) async -> [CaseByDate]? {
         // Aquí va aún más código bellaco (que bellaco el código)
         return await nservice.getCaseByDate(url: URL(string:"\(API.base)\(API.routes.Date)\(date)")!, Date: date)
         

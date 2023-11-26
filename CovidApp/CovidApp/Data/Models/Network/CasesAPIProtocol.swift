@@ -10,8 +10,8 @@ import Foundation
 protocol CasesAPIProtocol {
         
     // https://api.api-ninjas.com/v1/covid19?date={country}
-    func getCaseByCountry(country: String) async -> CaseByCountry?
+    func getCaseByCountry(country: String) async -> [CaseByCountry]?
         
     // https://api.api-ninjas.com/v1/covid19?country={date}
-    func getCaseByDate(date: String) async -> CaseByDate?
+    func getCaseByDate(date: String) async -> [CaseByDate]?
 }

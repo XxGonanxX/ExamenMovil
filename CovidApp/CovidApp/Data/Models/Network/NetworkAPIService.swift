@@ -11,7 +11,7 @@ import Alamofire
 class NetworkAPIService {
     static let shared = NetworkAPIService()
 
-    func getCaseByCountry(url: URL, Country: String) async -> CaseByCountry? {
+    func getCaseByCountry(url: URL, Country: String) async -> [CaseByCountry]? {
         let headers: HTTPHeaders = [
                     //La apiKey es la de mi cuenta así que no debería haber problemas
                     "X-Api-Key": "wQJQSBY0VEm6Si+tRjTpCQ==qTcldfbpLTdYr3Zc"
@@ -26,8 +26,12 @@ class NetworkAPIService {
         case .success(let data):
                 // Si mi respuesta fue exitosa, decodeamos el JSON, si no, se regresa null
                 do {
-                    return try JSONDecoder().decode(CaseByCountry.self, from: data)
+                    //if let jsonString = String(data: data, encoding: .utf8) {
+                    //   print("JSON Response: \(jsonString)")
+                    //   }
+                    return try JSONDecoder().decode([CaseByCountry].self, from: data)
                 } catch {
+                    print("El decode falló")
                     return nil
                 }
             case let .failure(error):
@@ -36,7 +40,7 @@ class NetworkAPIService {
             }
         }
     
-    func getCaseByDate(url: URL, Date: String) async -> CaseByDate? {
+    func getCaseByDate(url: URL, Date: String) async -> [CaseByDate]? {
         let headers: HTTPHeaders = [
                     //La apiKey es la de mi cuenta así que no debería haber problemas
                     "X-Api-Key": "wQJQSBY0VEm6Si+tRjTpCQ==qTcldfbpLTdYr3Zc"
@@ -51,12 +55,13 @@ class NetworkAPIService {
                 // Si mi respuesta fue exitosa, decodeamos el JSON, si no, se regresa null
                 do {
                     print("Response Succeded")
-                    if let jsonString = String(data: data, encoding: .utf8) {
-                                                   print("JSON Response: \(jsonString)")
-                                               }
-                    return try JSONDecoder().decode(CaseByDate.self, from: data)
+                    //if let jsonString = String(data: data, encoding: .utf8) {
+                    //    print("JSON Response: \(jsonString)")
+                    //    }
+                    return try JSONDecoder().decode([CaseByDate].self, from: data)
                 } catch {
                     print("Not today bro")
+                    debugPrint(error)
                     return nil
                 }
             case let .failure(error):

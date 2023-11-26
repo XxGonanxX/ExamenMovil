@@ -8,28 +8,31 @@
 import Foundation
 
 // Este struct aplica cuando el caso es el de país
-struct CaseByCountry: Codable {
+struct CaseByCountry: Codable, Identifiable {
+    var id: UUID?
     var country: String
     var region: String
-    var cases: [Date]
+    var cases: [String: Cases]
 }
 
-struct Date: Codable {
+struct Date: Codable, Identifiable {
+    var id: UUID?
     var date: String
-    var cases: [Cases]
+    var cases: Cases
 }
 
 // Este struct específicamente es el único que comparten ambos tipos del JSON
 struct Cases: Codable, Identifiable {
-    var id: Int
+    var id: UUID?
+    let date: String?
     var total: Int
     var new: Int
 }
 
 // Ahora el struct en caso de que sea por fecha
 struct CaseByDate: Codable, Identifiable {
-    var id: Int
+    var id: UUID?
     var country: String
     var region: String
-    var cases: [Cases]
+    var cases: Cases
 }
