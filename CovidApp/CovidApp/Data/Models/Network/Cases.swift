@@ -7,22 +7,14 @@
 
 import Foundation
 
+struct CountryData: Codable {
+    let country: String
+    let region: String
+    let cases: [String: CaseData]
 
-struct Cases: Codable{
-    var count: Int
-    var results: [DateCases]
-    var startDate: String
-    var endDate: String
+    struct CaseData: Codable {
+        let total: Int
+        let new: Int
+    }
 }
 
-struct DateCases: Codable, Identifiable {
-    var id: Int
-    var date: String
-    var cases: Case
-}
-
-struct Case: Codable, Identifiable {
-    var id: Int
-    var total: Int
-    var new: Int
-}

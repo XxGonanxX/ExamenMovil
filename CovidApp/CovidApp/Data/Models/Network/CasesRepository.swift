@@ -12,15 +12,15 @@ struct API {
     
     struct routes {
         
-        static let startDate = "date="
-        static let endDate = "&"
-        static let country = "&country="
+        static let startDate = ""
+        static let endDate = ""
+        static let country = ""
         
     }
 }
 
 protocol CasesAPIProtocol {
-    func sendCaseData(startDate: String, endDate: String, country: String?, limit: Int) async -> Cases?
+    func sendCaseData(startDate: String, endDate: String, country: String?, limit: Int) async -> [CountryData]?
 }
 
 class CaseRepository: CasesAPIProtocol {
@@ -32,19 +32,28 @@ class CaseRepository: CasesAPIProtocol {
         self.nservice = nservice
     }
     
-    func sendCaseData(startDate: String, endDate: String, country: String?, limit: Int) async -> Cases? {
+    func sendCaseData(startDate: String, endDate: String, country: String?, limit: Int) async -> [CountryData]? {
         let apiInstance = API()
         let urlString = "\(apiInstance.base)\(API.routes.startDate)\(startDate)\(API.routes.endDate)\(endDate)\(API.routes.country)\(country)"
         
         guard let url = URL(string: urlString) else {
             // Manejo de error si la URL no es válida
+            print("No funcionó")
             return nil
         }
         
-        
-
-        return await nservice.sendCaseData(startDate: startDate, endDate: endDate, country: country, limit: limit)
+        do {
+            print("estoy en el sendcasedata")
+            
+            // Aquí utilizamos try await dentro de un bloque do-catch para manejar posibles errores
+            return try await nservice.sendCaseData(startDate: startDate, endDate: endDate, country: country, limit: limit)
+        } catch {
+            // Manejo de errores
+            print("Error al enviar datos de casos: \(error)")
+            return nil
+        }
     }
+
 
 }
 

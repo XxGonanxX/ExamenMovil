@@ -14,37 +14,36 @@ class NetworkAPIService {
     let apiKey = "wQJQSBY0VEm6Si+tRjTpCQ==qTcldfbpLTdYr3Zc"
     let baseURL = "https://api.api-ninjas.com/v1/covid19"
     
-    func sendCaseData(startDate: String, endDate: String, country: String?, limit: Int) async -> Cases? {
-        let url = URL(string: "\(baseURL)?date=\(startDate)&\(endDate)&country=\(country ?? "")")!
-
-        let headers: HTTPHeaders = [
-            "X-Api-Key": apiKey
-        ]
-
-        let taskRequest = AF.request(url, method: .get, headers: headers).validate()
-        let response = await taskRequest.serializingData().response
-        
-        print(taskRequest)
-        print(response)
-        
-        switch response.result {
-        case .success(let data):
-            do {
-                if let jsonString = String(data: data, encoding: .utf8) {
-                               print("JSON Response: \(jsonString)")
-                           }
-                return try JSONDecoder().decode(Cases.self, from: data)
-            } catch {
-                return try nil
+    func sendCaseData(startDate: String, endDate: String, country: String?, limit: Int) async throws -> [CountryData]? {
+        print("En el networkapiservice")
+        do {
+            let url = URL(string: "\(baseURL)?startDate=\(startDate)&endDate=\(endDate)&country=\(country ?? "")&limit=\(limit)")!
+            
+            let headers: HTTPHeaders = [
+                "X-Api-Key": apiKey
+            ]
+            
+            let data = AF.request(url, method: .get, headers: headers).validate()
+            let response = await data.serializingData().response
+            
+            // if let jsonString = String(data: data, encoding: .utf8) {
+            // print("JSON Response: \(jsonString)")
+            //  }
+            
+            switch response.result{
+            case.success(let data):
+                do {
+                    print("Veamos el JSON")
+                    return try JSONDecoder().decode([CountryData].self, from: data)
+                } catch {
+                    print("no jala")
+                    return nil
+                }
+            case let .failure(error):
+                debugPrint(error.localizedDescription)
+                return nil
             }
-        case .failure(let error):
-            debugPrint(error.localizedDescription)
-            if let data = response.data {
-                let stringData = String(data: data, encoding: .utf8)
-                print("Response Data: \(stringData ?? "Unable to decode data")")
-            }
-            return nil
         }
-
     }
+    
 }

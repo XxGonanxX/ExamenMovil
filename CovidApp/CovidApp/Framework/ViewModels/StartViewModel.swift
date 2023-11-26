@@ -14,6 +14,8 @@ class StartViewModel: ObservableObject {
     @Published var endDate = Date()
     @Published var textInput = ""
     var detailView: DetailView?
+    @Published var cases: [CountryData] = []
+    private var casos: [CountryData]?
     
     
     private let casesRepository: CaseRepository
@@ -35,11 +37,19 @@ class StartViewModel: ObservableObject {
         }
           }
 
-        func procesarDatos() async {
-            let cases = await casesRepository.sendCaseData(startDate: StartView.dateFormatter.string(from: startDate), endDate: StartView.dateFormatter.string(from: endDate), country: textInput, limit: 10)
-            
+    func procesarDatos() async {
+        casos = await casesRepository.sendCaseData(startDate: StartView.dateFormatter.string(from: startDate), endDate: StartView.dateFormatter.string(from: endDate), country: textInput, limit: 10)
+        
+        if let casosDesempaquetados = casos {
             // Hacer algo con los datos devueltos por la API, por ejemplo, imprimirlos
-            print(cases)
-            }
+            print("Ahora van los casos")
+            print(casosDesempaquetados)
+            
+        } else {
+            print("No se obtuvieron casos")
         }
+        
+        return casosDesempaquetados
+    }
+}
 
