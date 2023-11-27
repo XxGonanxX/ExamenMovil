@@ -13,7 +13,7 @@ struct CovidAppApp: App {
         
         var body: some Scene {
             WindowGroup {
-                DetailView()
+                StartView()
             }.onChange(of: scenePhase) { (newScenePhase) in
                 switch newScenePhase {
                 case .background:

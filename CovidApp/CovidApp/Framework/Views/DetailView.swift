@@ -7,9 +7,7 @@
 import SwiftUI
 
 struct DetailView: View {
-    @State var caseList = [CaseByDate]()
-    @State var caseListCountry = [CaseByCountry]()
-    @State var totalCases = 0
+    @StateObject private var detailViewModel = DetailViewModel()
 
     var body: some View {
         HStack{
@@ -18,11 +16,11 @@ struct DetailView: View {
             Text("Total de casos")
         }
         HStack {
-            Text("Total de casos: \(totalCases)")
+            Text("Total de casos: \(detailViewModel.totalCases)")
         }
         
-        HStack{
-            List(caseList) { caseByDate in
+
+            List(detailViewModel.caseList) { caseByDate in
                 VStack() {
                     Text("\(caseByDate.country) |")
                     Text("\(caseByDate.cases.new) |")
@@ -30,64 +28,24 @@ struct DetailView: View {
                 }
             }
             .task {
-               await getCaseByDate()
+                await detailViewModel.getCaseByDate()
+                
             }
-            
-            List(caseListCountry) {caseByCountry in
+        
+        
+            List(detailViewModel.caseListCountry) {caseByCountry in
                 VStack() {
                     Text("\(caseByCountry.country) |")
-                    List(caseByCountry.cases.sorted(by: { $0.key < $1.key }), id: \.key) { date, caseData in
+                    ForEach(caseByCountry.cases.sorted(by: { $0.key < $1.key }), id: \.key) { date, caseData in
                         Text("\(date):")
-                        Text("\(caseData.total) |")
-                        Text("\(caseData.new)")
+                        Text("\(caseData.total) | \(caseData.new)")
                     }
                 }
             }
             .task {
-                await getCaseByCountry()
+                await detailViewModel.getCaseByCountry()
             }
         }
-    }
-
-    func getCaseByDate() async {
-        do {
-            let repository = CasesRepository()
-            if let result = try await repository.getCaseByDate(date: "2022-05-05") {
-                var tempCaseByDate = [CaseByDate]()
-                for (index, casesData) in result.enumerated() {
-                    let tempCase = CaseByDate(id: UUID(), country: casesData.country, region: casesData.region, cases: casesData.cases)
-                    tempCaseByDate.append(tempCase)
-                    totalCases += 1
-                }
-                
-                caseList = tempCaseByDate
-            }
-        } catch {
-            print("Error: \(error)")
-        }
-    }
-    
-    
-    func getCaseByCountry() async {
-        do {
-
-            let repository = CasesRepository()
-            print(try await repository.getCaseByCountry(country: "Mexico"))
-            if let resultCountry = try await repository.getCaseByCountry(country: "Mexico") {
-                var tempCaseByCountry = [CaseByCountry]()
-                for (index, casesData) in resultCountry.enumerated() {
-                    let tempCase = CaseByCountry(id: UUID(), country: casesData.country, region: casesData.region, cases: casesData.cases)
-                    tempCaseByCountry.append(tempCase)
-                    totalCases += 1
-                }
-                
-                caseListCountry = tempCaseByCountry
-            }
-
-        } catch {
-            print("Error: \(error)")
-        }
-    }
 }
 
 struct DetailView_Previews: PreviewProvider {

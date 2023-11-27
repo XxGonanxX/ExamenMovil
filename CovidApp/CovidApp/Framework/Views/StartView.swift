@@ -7,61 +7,48 @@
 
 import SwiftUI
 
-
-
 struct StartView: View {
-    
-    @StateObject private var startViewModel = StartViewModel()
-    @State public var prueba1: String
-    
-    static let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter
-    }()
+    @ObservedObject var viewModel = DetailViewModel()
     
     var body: some View {
         NavigationView {
             VStack {
                 Spacer()
-                Text("Bienvenido, por favor, ingrese un país o una fecha (no ambos)")
-                    .padding()
+                Text("Bienvenido, por favor, ingrese un país o una fecha, no es necesario que ingreses ambos.")
                 
-                TextField("Ingresa una fecha" , text: $prueba1)
-                    .keyboardType(.numbersAndPunctuation)
-                    .padding()
-                
-                // TextField para el texto
-                TextField("Ingresa un país", text: $prueba1)
-                    .padding()
-                
-                Spacer()
-                
-                Button(action: {
-                    Task{
-                      //  let results = await startViewModel.procesarDatoss()
-                     //   Text("Resultados")
-                    }
-                                
-                }) {
-                    Text("Aceptar")
+                VStack {
+                    TextField("Ingresa la fecha", text: $viewModel.inputDate)
                         .padding()
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(10)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+                    
+                    TextField("Ingresa país", text: $viewModel.inputCountry)
+                        .padding()
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
                 }
                 Spacer()
+                Button(action: {
+        
+                })
+                {
+                    NavigationLink(destination: DetailView()) {
+                        
+                        Text("Aceptar")
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                    }
+                }
+                
             }
-            
-            Spacer()
-            
-            
         }
     }
+                
 }
 
-    
 #Preview {
-    StartView(prueba1: String())
+    StartView()
     
 }

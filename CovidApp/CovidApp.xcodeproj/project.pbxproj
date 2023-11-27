@@ -12,7 +12,6 @@
 		4711A3B42B0FC67B00048F73 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711A3B32B0FC67B00048F73 /* DetailView.swift */; };
 		4711A3B62B0FC74700048F73 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711A3B52B0FC74700048F73 /* StartViewModel.swift */; };
 		4711A3B82B0FC97B00048F73 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711A3B72B0FC97B00048F73 /* DetailViewModel.swift */; };
-		4711A3BA2B0FCABC00048F73 /* CasesListRequirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711A3B92B0FCABC00048F73 /* CasesListRequirement.swift */; };
 		4711A3BC2B0FCB9100048F73 /* NetworkAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711A3BB2B0FCB9100048F73 /* NetworkAPIService.swift */; };
 		4711A3BE2B0FCC1D00048F73 /* Cases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711A3BD2B0FCC1D00048F73 /* Cases.swift */; };
 		4711A3C02B0FCCB400048F73 /* CasesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711A3BF2B0FCCB400048F73 /* CasesRepository.swift */; };
@@ -48,7 +47,6 @@
 		4711A3B32B0FC67B00048F73 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		4711A3B52B0FC74700048F73 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 		4711A3B72B0FC97B00048F73 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
-		4711A3B92B0FCABC00048F73 /* CasesListRequirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CasesListRequirement.swift; sourceTree = "<group>"; };
 		4711A3BB2B0FCB9100048F73 /* NetworkAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPIService.swift; sourceTree = "<group>"; };
 		4711A3BD2B0FCC1D00048F73 /* Cases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cases.swift; sourceTree = "<group>"; };
 		4711A3BF2B0FCCB400048F73 /* CasesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CasesRepository.swift; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 		4711A3A92B0FC30D00048F73 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				4711A3B92B0FCABC00048F73 /* CasesListRequirement.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -364,7 +361,6 @@
 				4711A3BC2B0FCB9100048F73 /* NetworkAPIService.swift in Sources */,
 				4711A3BE2B0FCC1D00048F73 /* Cases.swift in Sources */,
 				471CEB452B0FC11A005FE1EB /* CovidAppApp.swift in Sources */,
-				4711A3BA2B0FCABC00048F73 /* CasesListRequirement.swift in Sources */,
 				4722FD132B1337AB00366119 /* CasesAPIProtocol.swift in Sources */,
 				4711A3C02B0FCCB400048F73 /* CasesRepository.swift in Sources */,
 			);

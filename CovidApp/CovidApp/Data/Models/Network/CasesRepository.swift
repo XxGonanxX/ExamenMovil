@@ -25,6 +25,8 @@ class CasesRepository: CasesAPIProtocol {
     
     let nservice: NetworkAPIService
     
+    static let shared = CasesRepository()
+    
     init(nservice: NetworkAPIService = NetworkAPIService.shared) {
         self.nservice = nservice
     }
